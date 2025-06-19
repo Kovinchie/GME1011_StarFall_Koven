@@ -14,6 +14,8 @@ namespace GME1011_StarFall_Koven
         private Vector2 _location;
         private int _x;
         private int _y;
+        private int _points;
+        private int _health;
 
         public kovensKeys()
         {
@@ -21,6 +23,24 @@ namespace GME1011_StarFall_Koven
             _location = new Vector2(400, 240);
             _x = 24;
             _y = 96;
+            _points = 0;
+            _health = 3; // Starting health
+        }
+        public void AddPoint()
+        {
+            _points ++;
+        }
+        public void TakeDamage()
+        {
+            _health--;
+        }
+        public int Gethealth()
+        {
+            return _health;
+        }
+        public int GetPoints()
+        {
+            return _points;
         }
 
         public int GetKeyPressed()
@@ -29,32 +49,31 @@ namespace GME1011_StarFall_Koven
         }
         public Vector2 GetLocation()
         {
-            // Calculate the x and y position based on the key pressed
-            if (_keypressed <= 10)
-            {
-                _x = 24 + (80 * (_keypressed - 1)); // Top row
-                _y = 96;
-            }
-            if (_keypressed <= 19 && 10 < _keypressed)
-            {
-                _x = 64 + (80 * (_keypressed - 11)); // Middle row
-                _y = 216;
-            }
-            if (_keypressed <= 27 && _keypressed > 19)
-            {
-                _x = 104 + (80 * (_keypressed - 20)); // Bottom row
-                _y = 336;
-            }
-            /*else
-            {
-                _x = 0; // Default case, should not happen
-                _y = 0;
-            }*/
-
-            _location = new Vector2(_x, _y);
-            return _location;
+            return GetLocation(_keypressed); // changed it so i can grab the location of the key pressed inside keycaps
         }
+        public Vector2 GetLocation(int keypressed)
+        {
+             int spot = keypressed;
+            // Calculate the x and y position based on the key pressed
+            if (spot <= 10)
+            {
+                _x = 20 + (80 * (spot - 1)); // Top row
+                _y = 92;
+            }
+            if (spot <= 19 && 10 < spot)
+            {
+                _x = 60 + (80 * (spot - 11)); // Middle row
+                _y = 212;
+            }
+            if (spot <= 27 && spot > 19)
+            {
+                _x = 100 + (80 * (spot - 20)); // Bottom row
+                _y = 332;
+            }
 
+            Vector2 location = new Vector2(_x, _y);
+            return location;
+        }
 
         public void Update()
         {

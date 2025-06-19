@@ -44,7 +44,7 @@
 /processorParam:TextureFormat=Color
 /build:Ralph.png
 
-#begin Ralph.png
+#begin Spikey.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,5 +54,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Ralph.png
+/build:Spikey.png
 
