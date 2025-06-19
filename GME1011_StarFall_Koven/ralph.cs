@@ -13,13 +13,18 @@ namespace GME1011_StarFall_Koven
     internal class ralph : kovensKeycaps 
     {
         private Texture2D _texture;
-        private Rectangle _ralphHitbox;
 
-        public ralph(Texture2D ralphTexture,kovensKeys playingKey) : base(ralphTexture, playingKey)
+        public ralph(Texture2D ralphTexture,kovensKeys playingKey, SpriteFont gameFont) : base(ralphTexture, playingKey, gameFont)
         {
             _texture = ralphTexture;
+            _description = "Not you again...";
         }
 
+        public override void ChangeLocation()
+        {
+            base.ChangeLocation();
+            _Location = _playingKey.GetLocation(_spot);
+        }
 
         public override void Update()
         {

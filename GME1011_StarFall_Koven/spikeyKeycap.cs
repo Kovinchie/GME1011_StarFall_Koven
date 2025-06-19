@@ -14,48 +14,31 @@ namespace GME1011_StarFall_Koven
     internal class spikeyKeycap : kovensKeycaps
     {
         private Texture2D _texture;
-        private Rectangle _spikeyHitbox;
-        public spikeyKeycap(Texture2D textureSpikey, kovensKeys playingKey) : base(textureSpikey, playingKey)
+        private Vector2 _ajustedLocation;
+        public spikeyKeycap(Texture2D textureSpikey, kovensKeys playingKey, SpriteFont gameFont) : base(textureSpikey, playingKey, gameFont)
         {
             _texture = textureSpikey;
-            _Location.X -= 4;
-            _Location.Y -= 4;
+            _description = "Avoid Spikey Keys!";
+            _ajustedLocation = new Vector2(_Location.X - 4, _Location.Y - 4); // Adjust the initial location
         }
 
         public override void ChangeLocation()
         {
-            int position = _rng.Next(1, _rngMax);
-            while (position == _playingKey.GetKeyPressed())
+            base.ChangeLocation();
+            if (_ajustedLocation != _Location)
             {
-                position = _rng.Next(1, _rngMax); // Ensure the new position is not the same as the pressed key
+                _ajustedLocation = new Vector2(_Location.X - 4, _Location.Y - 4);
+                _Location = _ajustedLocation; // Update the location with the adjusted position
             }
-            _spot = position;
-            _Location = _playingKey.GetLocation(_spot);
-            _Location.X -= 4; // Adjust the X position
-            _Location.Y -= 4; // Adjust the Y position
         }
 
         public override void Update()
         {
-            if (_playingKey.GetKeyPressed() == _spot)
+            base.Update();
+            if (_ajustedLocation != _Location)
             {
-                Vector2 tempLocation;
-            int position = _rng.Next(1, _rngMax);
-
-            while (_spot == _playingKey.GetKeyPressed()) // make sure all stacked keycaps are moved
-            {
-                position = _rng.Next(1, _rngMax);
-                tempLocation = _playingKey.GetLocation(position);
-                if (_playingKey.GetLocation() != tempLocation)
-                {
-                    _Location = tempLocation;
-                    _spot = position;
-                }
-            }
-
-                _Location.X -= 4; // Adjust the X position
-                _Location.Y -= 4; // Adjust the Y position
-                Debug.WriteLine("Lost health");
+                _ajustedLocation = new Vector2(_Location.X - 4, _Location.Y - 4);
+                _Location = _ajustedLocation; // Update the location with the adjusted position
             }
         }
     }

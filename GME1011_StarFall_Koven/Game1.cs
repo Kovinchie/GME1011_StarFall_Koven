@@ -33,8 +33,8 @@ namespace GME1011_StarFall_Koven
         {
             // TODO: Add your initialization logic here
             _kovensKeycaps = new List<kovensKeycaps>();
-            _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"),_kovensKeys));
-            _kovensKeycaps.Add(new spikeyKeycap(Content.Load<Texture2D>("Spikey"), _kovensKeys));
+            _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"),_kovensKeys, Content.Load<SpriteFont>("RalphText")));
+            _kovensKeycaps.Add(new spikeyKeycap(Content.Load<Texture2D>("Spikey"), _kovensKeys, Content.Load<SpriteFont>("infoText")));
 
             base.Initialize();
         }
@@ -43,7 +43,7 @@ namespace GME1011_StarFall_Koven
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _background = Content.Load<Texture2D>("Keyboard");
-            gameFont = Content.Load<SpriteFont>("GameFont");
+            gameFont = Content.Load<SpriteFont>("infoText");
 
 
             // TODO: use this.Content to load your game content here

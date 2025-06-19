@@ -13,12 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin GameFont.spritefont
+#begin infoText.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:GameFont.spritefont
+/build:infoText.spritefont
 
 #begin Keyboard.png
 /importer:TextureImporter
@@ -43,6 +43,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Ralph.png
+
+#begin RalphText.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:RalphText.spritefont
 
 #begin Spikey.png
 /importer:TextureImporter
