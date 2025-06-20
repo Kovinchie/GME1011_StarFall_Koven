@@ -5,6 +5,10 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Threading.Tasks;
+using System.Net.Mime;
+using System.Threading;
 
 namespace GME1011_StarFall_Koven
 {
@@ -18,8 +22,10 @@ namespace GME1011_StarFall_Koven
         private SpriteFont gameFont;
         private kovensKeys _kovensKeys;
         private List<kovensKeycaps> _kovensKeycaps;
-        private int _gameTime;
-        private int _gameTime2;
+        private List<Clouds> _clouds;
+        private Random _rng = new Random();
+        private int _digitCount1;
+        private int _digitCoun2;
         private int _timer;
 
         public Game1()
@@ -29,8 +35,8 @@ namespace GME1011_StarFall_Koven
             IsMouseVisible = true;
 
             _kovensKeys = new kovensKeys();
-            _gameTime = 0;
-            _gameTime2 = 0;
+            _digitCount1 = 0;
+            _digitCoun2 = 0;
             _timer = 0; // Initialize timeAdd to 0
 
         }
@@ -39,7 +45,8 @@ namespace GME1011_StarFall_Koven
         {
             // TODO: Add your initialization logic here
             _kovensKeycaps = new List<kovensKeycaps>();
-            _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"),_kovensKeys, Content.Load<SpriteFont>("RalphText")));
+
+            _clouds = new List<Clouds>();
 
             base.Initialize();
         }
@@ -50,6 +57,13 @@ namespace GME1011_StarFall_Koven
             _background = Content.Load<Texture2D>("Keyboard");
             gameFont = Content.Load<SpriteFont>("infoText");
 
+
+            _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"), _kovensKeys, Content.Load<SpriteFont>("RalphText")));
+
+            for (int i = 0; i < _rng.Next(10, 20); i++)
+            {
+                _clouds.Add(new Clouds(Content.Load<Texture2D>("Cloud")));
+            }
 
             // TODO: use this.Content to load your game content here
         }
@@ -88,15 +102,16 @@ namespace GME1011_StarFall_Koven
             _timer++;
             if (_timer >= 60)
             {
-                _gameTime++;
+                _digitCount1++;
                 _timer = 0;
             }
-            if (_gameTime >= 60)
+            if (_digitCount1 >= 60)
             {
-                _gameTime2++;
-                _gameTime = 0;
+                _digitCoun2++;
+                _digitCount1 = 0;
             }
 
+            _clouds.ForEach(cloud => cloud.Update()); // Update clouds if you have a Clouds class
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -110,9 +125,10 @@ namespace GME1011_StarFall_Koven
 
             _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
             _spriteBatch.Draw(Content.Load<Texture2D>("CurrentKeycap"), _kovensKeys.GetLocation(), Color.White);
-            _kovensKeycaps.ForEach(keyCap => keyCap.Draw(_spriteBatch)); // copilot helped
+            _kovensKeycaps.ForEach(keyCap => keyCap.Draw(_spriteBatch));
+            _clouds.ForEach(cloud => cloud.Draw(_spriteBatch)); // Draw clouds
             _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Red);
-            _spriteBatch.DrawString(gameFont, "Time"+ _gameTime2 +" : "+_gameTime, new Vector2(700, 460), Color.Red);
+            _spriteBatch.DrawString(gameFont, "Time"+ _digitCoun2 +" : "+_digitCount1, new Vector2(700, 460), Color.Red);
 
             if (_kovensKeys.Gethealth() <= 0)
             {

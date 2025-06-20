@@ -27,7 +27,7 @@ namespace GME1011_StarFall_Koven
             _points = 0;
             _health = 3; // Starting health
         }
-        public void AddPoint(){_points += 5;}
+        public void AddPoint(){_points++;}
         public void ResetPoints(){_points = 0;}
         public void TakeDamage(int damage){_health += damage;}
         public int Gethealth(){return _health;}
@@ -35,7 +35,7 @@ namespace GME1011_StarFall_Koven
         public int GetKeyPressed(){return _keypressed;}
         public Vector2 GetLocation()
         {
-            return GetLocation(_keypressed); // changed it so i can grab the location of the key pressed inside keycaps
+            return GetLocation(_keypressed); // I want to use the math for other places as well
         }
         public Vector2 GetLocation(int keypressed)
         {
