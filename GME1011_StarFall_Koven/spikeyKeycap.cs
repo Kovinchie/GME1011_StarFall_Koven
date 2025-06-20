@@ -8,6 +8,7 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.ComponentModel.Design;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace GME1011_StarFall_Koven
@@ -16,7 +17,8 @@ namespace GME1011_StarFall_Koven
     {
         private Texture2D _texture;
         private Vector2 _ajustedLocation;
-        public spikeyKeycap(Texture2D textureSpikey, kovensKeys playingKey, SpriteFont gameFont) : base(textureSpikey, playingKey, gameFont)
+        public spikeyKeycap(Texture2D textureSpikey, kovensKeys playingKey, SpriteFont gameFont, List<SoundEffect> hitsounds)
+            : base(textureSpikey, playingKey, gameFont, hitsounds)
         {
             _texture = textureSpikey;
             _description = "\nAvoid   Spikey   Keys!";
@@ -35,7 +37,10 @@ namespace GME1011_StarFall_Koven
         public override void Update()
         {
             if (_playingKey.GetKeyPressed() == _spot)
+            {
                 _playingKey.TakeDamage(-1);
+                _hitSounds[2].Play();
+            }
 
             base.Update();
 

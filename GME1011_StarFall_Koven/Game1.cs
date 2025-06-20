@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using System.Net.Mime;
 using System.Threading;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
+
 
 namespace GME1011_StarFall_Koven
 {
@@ -17,6 +20,10 @@ namespace GME1011_StarFall_Koven
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private Song _music;
+        private List<SoundEffect> _hitSounds;
+
 
         private Texture2D _background;
         private SpriteFont gameFont;
@@ -53,12 +60,22 @@ namespace GME1011_StarFall_Koven
 
         protected override void LoadContent()
         {
+            _music = Content.Load<Song>("Plaint");
+            _hitSounds = new List<SoundEffect>
+            {
+                Content.Load<SoundEffect>("Wood"),
+                Content.Load<SoundEffect>("Clicky"),
+                Content.Load<SoundEffect>("String"),
+                Content.Load<SoundEffect>("Shuffle")
+            };
+            MediaPlayer.Play(_music);
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _background = Content.Load<Texture2D>("Keyboard");
             gameFont = Content.Load<SpriteFont>("infoText");
 
 
-            _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"), _kovensKeys, Content.Load<SpriteFont>("RalphText")));
+            _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"), _kovensKeys, Content.Load<SpriteFont>("RalphText"), _hitSounds));
 
             for (int i = 0; i < _rng.Next(10, 20); i++)
             {
@@ -86,7 +103,7 @@ namespace GME1011_StarFall_Koven
             }
             if (_kovensKeys.GetPoints() % 10 == 0)
             {
-                _kovensKeycaps.Add(new spikeyKeycap(Content.Load<Texture2D>("Spikey"), _kovensKeys, Content.Load<SpriteFont>("infoText")));
+                _kovensKeycaps.Add(new spikeyKeycap(Content.Load<Texture2D>("Spikey"), _kovensKeys, Content.Load<SpriteFont>("infoText"), _hitSounds));
                 _kovensKeys.AddPoint();
             }
 
@@ -96,7 +113,7 @@ namespace GME1011_StarFall_Koven
                 _kovensKeys.TakeDamage(3);
                 _kovensKeys.ResetPoints();
                 _kovensKeycaps.Clear(); // Clear the keycaps when space is pressed
-                _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"), _kovensKeys, Content.Load<SpriteFont>("RalphText"))); // Add a new keycap
+                _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"), _kovensKeys, Content.Load<SpriteFont>("RalphText"), _hitSounds)); // Add a new keycap
             }
 
             _timer++;
@@ -110,7 +127,6 @@ namespace GME1011_StarFall_Koven
                 _digitCoun2++;
                 _digitCount1 = 0;
             }
-
             _clouds.ForEach(cloud => cloud.Update()); // Update clouds if you have a Clouds class
             // TODO: Add your update logic here
 
@@ -123,10 +139,10 @@ namespace GME1011_StarFall_Koven
             GraphicsDevice.Clear(Color.White);
             _spriteBatch.Begin();
 
+            _clouds.ForEach(cloud => cloud.Draw(_spriteBatch)); // Draw clouds
             _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
             _spriteBatch.Draw(Content.Load<Texture2D>("CurrentKeycap"), _kovensKeys.GetLocation(), Color.White);
             _kovensKeycaps.ForEach(keyCap => keyCap.Draw(_spriteBatch));
-            _clouds.ForEach(cloud => cloud.Draw(_spriteBatch)); // Draw clouds
             _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Red);
             _spriteBatch.DrawString(gameFont, "Time"+ _digitCoun2 +" : "+_digitCount1, new Vector2(700, 460), Color.Red);
 

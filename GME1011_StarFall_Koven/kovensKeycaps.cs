@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Net.Mime;
 using System.Threading;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace GME1011_StarFall_Koven
 {
@@ -18,6 +20,7 @@ namespace GME1011_StarFall_Koven
         protected int _spot;
         protected Random _rng = new Random();
         private Texture2D _texture;
+        protected List<SoundEffect> _hitSounds;
         protected SpriteFont _gameFont;
         protected string _description;
         protected int _timer;
@@ -26,13 +29,14 @@ namespace GME1011_StarFall_Koven
 
         protected int _rngMax = 27; // should be 27
         protected kovensKeys _playingKey;
-        public kovensKeycaps(Texture2D texture, kovensKeys playingKey, SpriteFont gameFont) 
+        public kovensKeycaps(Texture2D texture, kovensKeys playingKey, SpriteFont gameFont, List<SoundEffect> hitsounds) 
         {
             _spot = _rng.Next(1, _rngMax); // Randomly select a key spot between 1 and 26
             _Location = playingKey.GetLocation(_spot);
             _playingKey = playingKey;
             _texture = texture;
             _gameFont = gameFont;
+            _hitSounds = hitsounds;
 
             _timer = 4 * 60;
             _visable = true;
@@ -55,6 +59,7 @@ namespace GME1011_StarFall_Koven
             {
                 position = _rng.Next(1, _rngMax); // Ensure the new position is not the same as the pressed key
             }
+            _hitSounds[3].Play();
             _spot = position;
             _Location = _playingKey.GetLocation(_spot);
         }

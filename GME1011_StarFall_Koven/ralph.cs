@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace GME1011_StarFall_Koven
 {
@@ -16,7 +17,8 @@ namespace GME1011_StarFall_Koven
         private bool _toggle;
         private string[] _ralphalog; // GET IT LOL!!! ITS LIKE ralph + dialog SO FUNNY RIGHT XD
 
-        public ralph(Texture2D ralphTexture,kovensKeys playingKey, SpriteFont gameFont) : base(ralphTexture, playingKey, gameFont)
+        public ralph(Texture2D ralphTexture,kovensKeys playingKey, SpriteFont gameFont, List<SoundEffect> hitsounds)
+            : base(ralphTexture, playingKey, gameFont, hitsounds)
         {
             _texture = ralphTexture;
             _description = "Not you again...";
@@ -60,7 +62,10 @@ namespace GME1011_StarFall_Koven
         public override void Update()
         {
             if (_playingKey.GetKeyPressed() == _spot)
+            {
                 _playingKey.AddPoint();
+                _hitSounds[_rng.Next(0, 2)].Play();
+            }
             base.Update();
         }
 

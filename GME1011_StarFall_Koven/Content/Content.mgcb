@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Clicky.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Clicky.wav
+
 #begin Cloud.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -56,6 +62,12 @@
 /processorParam:TextureFormat=Color
 /build:Keyboard.png
 
+#begin Plaint.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Plaint.mp3
+
 #begin Ralph.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -75,6 +87,12 @@
 /processorParam:TextureFormat=Compressed
 /build:RalphText.spritefont
 
+#begin Shuffle.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Shuffle.wav
+
 #begin Spikey.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -86,4 +104,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Spikey.png
+
+#begin String.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:String.wav
+
+#begin Wood.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Wood.wav
 

@@ -38,8 +38,13 @@ namespace GME1011_StarFall_Koven
             _location.X -= _speed; // Move clouds to the left
             if (_location.X < -(_texture.Width/2))
             {
+                // make clouds feel special
                 _location.X = 800+(_texture.Width/2);
                 _location.Y = _rng.Next(0, 480);
+                _color = new Color(210 + _rng.Next(0, 41), 170 + _rng.Next(0, 21), 120 + _rng.Next(0, 21));
+                _scale = _rng.Next(50, 150) / 200f;
+                _transparency = _rng.Next(1, 61) / 100f;
+                _speed = _rng.Next(1, 4) / 10f;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
