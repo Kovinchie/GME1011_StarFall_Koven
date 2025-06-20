@@ -20,8 +20,8 @@ namespace GME1011_StarFall_Koven
         private Texture2D _texture;
         protected SpriteFont _gameFont;
         protected string _description;
-        private int _timer;
-        private bool _visable;
+        protected int _timer;
+        protected bool _visable;
         
 
         protected int _rngMax = 27; // should be 27
@@ -56,31 +56,30 @@ namespace GME1011_StarFall_Koven
                 position = _rng.Next(1, _rngMax); // Ensure the new position is not the same as the pressed key
             }
             _spot = position;
+            _Location = _playingKey.GetLocation(_spot);
         }
-
-        public virtual void Update()
+        public virtual void Timer()
         {
             if (_timer > 0)
             {
                 _timer--;
-                _visable = true;
             }
             else
                 _visable = false;
+        }
 
+        public virtual void Update()
+        {
+            
             if (_playingKey.GetKeyPressed() == _spot)
             {
-                Vector2 tempLocation;
-                Vector2 currentLocation;
-                currentLocation = _Location;
-                _spot = _rng.Next(1, _rngMax);
-
-                tempLocation = _playingKey.GetLocation(_spot);
-                if (_playingKey.GetLocation() != tempLocation)
+                int position = _rng.Next(1, _rngMax);
+                while (position == _playingKey.GetKeyPressed())
                 {
-                    currentLocation = tempLocation;
+                    position = _rng.Next(1, _rngMax); // Ensure the new position is not the same as the pressed key
                 }
-                _Location = currentLocation;
+                _spot = position;
+                _Location = _playingKey.GetLocation(_spot);
             }
         }
 

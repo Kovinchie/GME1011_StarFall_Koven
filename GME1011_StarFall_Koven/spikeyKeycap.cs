@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.ComponentModel.Design;
 
 
 namespace GME1011_StarFall_Koven
@@ -18,7 +19,7 @@ namespace GME1011_StarFall_Koven
         public spikeyKeycap(Texture2D textureSpikey, kovensKeys playingKey, SpriteFont gameFont) : base(textureSpikey, playingKey, gameFont)
         {
             _texture = textureSpikey;
-            _description = "Avoid Spikey Keys!";
+            _description = "\nAvoid   Spikey   Keys!";
             _ajustedLocation = new Vector2(_Location.X - 4, _Location.Y - 4); // Adjust the initial location
         }
 
@@ -31,10 +32,13 @@ namespace GME1011_StarFall_Koven
                 _Location = _ajustedLocation; // Update the location with the adjusted position
             }
         }
-
         public override void Update()
         {
+            if (_playingKey.GetKeyPressed() == _spot)
+                _playingKey.TakeDamage();
+
             base.Update();
+
             if (_ajustedLocation != _Location)
             {
                 _ajustedLocation = new Vector2(_Location.X - 4, _Location.Y - 4);

@@ -55,6 +55,7 @@ namespace GME1011_StarFall_Koven
                 Exit();
             _kovensKeys.Update();
             _kovensKeycaps.ForEach(keyCap => keyCap.Update()); // copilot helped
+            _kovensKeycaps.ForEach(Key => Key.Timer()); // Set the font for each keycap
 
             for (int i = 1; i < _kovensKeycaps.Count; i++)
             {
@@ -84,8 +85,9 @@ namespace GME1011_StarFall_Koven
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
-            _spriteBatch.DrawString(gameFont, ""+_kovensKeys.GetKeyPressed(), _kovensKeys.GetLocation(), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("CurrentKeycap"), _kovensKeys.GetLocation(), Color.White);
             _kovensKeycaps.ForEach(keyCap => keyCap.Draw(_spriteBatch)); // copilot helped
+            _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Red);
 
             _spriteBatch.End();
 
