@@ -144,8 +144,8 @@ namespace GME1011_StarFall_Koven
             _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
             _spriteBatch.Draw(Content.Load<Texture2D>("CurrentKeycap"), _kovensKeys.GetLocation(), Color.White);
             _kovensKeycaps.ForEach(keyCap => keyCap.Draw(_spriteBatch));
-            _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Red);
-            _spriteBatch.DrawString(gameFont, "Time"+ _digitCoun2 +" : "+_digitCount1, new Vector2(700, 460), Color.Red);
+            _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Maroon);
+            _spriteBatch.DrawString(gameFont, "Time"+ _digitCoun2 +" : "+_digitCount1, new Vector2(700, 460), Color.Maroon);
 
             if (_kovensKeys.Gethealth() <= 0)
             {
