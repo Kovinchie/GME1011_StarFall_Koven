@@ -35,7 +35,7 @@ namespace GME1011_StarFall_Koven
         public override void Update()
         {
             if (_playingKey.GetKeyPressed() == _spot)
-                _playingKey.TakeDamage();
+                _playingKey.TakeDamage(-1);
 
             base.Update();
 

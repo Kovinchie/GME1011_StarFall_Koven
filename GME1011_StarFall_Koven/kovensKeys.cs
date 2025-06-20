@@ -31,9 +31,9 @@ namespace GME1011_StarFall_Koven
         {
             _points ++;
         }
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
-            _health--;
+            _health += damage;
         }
         public int Gethealth()
         {
@@ -78,6 +78,11 @@ namespace GME1011_StarFall_Koven
 
         public void Update()
         {
+            if (_health <= 0)
+            {
+                _health = 0; // Prevent health from going below 0
+                return; // Stop processing if health is 0
+            }
             KeyboardState keystate = Keyboard.GetState();
             // TOP ROW
             if (keystate.IsKeyDown(Keys.Q))

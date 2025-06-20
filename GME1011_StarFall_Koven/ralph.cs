@@ -14,6 +14,7 @@ namespace GME1011_StarFall_Koven
     {
         private Texture2D _texture;
         private bool _toggle;
+        private string[] _ralphalog; // GET IT LOL!!! ITS LIKE ralph + dialog SO FUNNY RIGHT XD
 
         public ralph(Texture2D ralphTexture,kovensKeys playingKey, SpriteFont gameFont) : base(ralphTexture, playingKey, gameFont)
         {
@@ -21,6 +22,16 @@ namespace GME1011_StarFall_Koven
             _description = "Not you again...";
             _toggle = true;
             _timer = 5 * 60;
+            _ralphalog = new string[]
+            {
+                "Leave me alone!",
+                "please leave...",
+                "stop following me!!!",
+                "um... over here?",
+                "whats your problem.",
+                "wish i never met you.",
+                "what ever i guess."
+            };
         }
         public override void Timer()
         {
@@ -31,8 +42,9 @@ namespace GME1011_StarFall_Koven
             }
             else if (_toggle)
             {
-                _timer = _rng.Next(1, 6) * 60; // Reset the timer to 4 seconds
+                _timer = _rng.Next(2, 6) * 60; // Reset the timer rng
                 _visable = (false == _visable);
+                _description = _ralphalog[_rng.Next(0, _ralphalog.Length)];
                 _toggle = false;
             }
         }
