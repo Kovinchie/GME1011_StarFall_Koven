@@ -34,6 +34,7 @@ namespace GME1011_StarFall_Koven
                 "*  Sobs  *",
                 "what ever i guess."
             };
+            _hitSounds[4].Play();
         }
         public override void Timer()
         {
@@ -46,10 +47,16 @@ namespace GME1011_StarFall_Koven
             {
             _timer = _rng.Next(3, 7) * 60; // Reset the timer rng
             _visable = (false == _visable);
+                if (_visable && _toggle)
+                {
+                    _hitSounds[4].Play(); // Play the yap sound when the keycap reappears
+                }
             _toggle = false;
+                
             if (_playingKey.Gethealth() != 0)
                 {
                     _description = _ralphalog[_rng.Next(0, _ralphalog.Length)];
+
                 }
                 else
                 {

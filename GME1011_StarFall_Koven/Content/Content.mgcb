@@ -117,3 +117,9 @@
 /processorParam:Quality=Best
 /build:Wood.wav
 
+#begin Yap.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Yap.wav
+

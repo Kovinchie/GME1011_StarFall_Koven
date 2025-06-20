@@ -66,7 +66,8 @@ namespace GME1011_StarFall_Koven
                 Content.Load<SoundEffect>("Wood"),
                 Content.Load<SoundEffect>("Clicky"),
                 Content.Load<SoundEffect>("String"),
-                Content.Load<SoundEffect>("Shuffle")
+                Content.Load<SoundEffect>("Shuffle"),
+                Content.Load<SoundEffect>("Yap")
             };
             MediaPlayer.Play(_music);
 
