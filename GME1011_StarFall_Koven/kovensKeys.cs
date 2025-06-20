@@ -27,27 +27,12 @@ namespace GME1011_StarFall_Koven
             _points = 0;
             _health = 3; // Starting health
         }
-        public void AddPoint()
-        {
-            _points ++;
-        }
-        public void TakeDamage(int damage)
-        {
-            _health += damage;
-        }
-        public int Gethealth()
-        {
-            return _health;
-        }
-        public int GetPoints()
-        {
-            return _points;
-        }
-
-        public int GetKeyPressed()
-        {
-            return _keypressed;
-        }
+        public void AddPoint(){_points += 5;}
+        public void ResetPoints(){_points = 0;}
+        public void TakeDamage(int damage){_health += damage;}
+        public int Gethealth(){return _health;}
+        public int GetPoints(){return _points;}
+        public int GetKeyPressed(){return _keypressed;}
         public Vector2 GetLocation()
         {
             return GetLocation(_keypressed); // changed it so i can grab the location of the key pressed inside keycaps
@@ -80,124 +65,126 @@ namespace GME1011_StarFall_Koven
         {
             if (_health <= 0)
             {
-                _health = 0; // Prevent health from going below 0
-                return; // Stop processing if health is 0
+                _health = 0; //health does not go below 0
             }
-            KeyboardState keystate = Keyboard.GetState();
-            // TOP ROW
-            if (keystate.IsKeyDown(Keys.Q))
+            if (!(_health <= 0))
             {
-                _keypressed = 1;
-            }
-            if (keystate.IsKeyDown(Keys.W))
-            {
-                _keypressed = 2;
-            }
-            if (keystate.IsKeyDown(Keys.E))
-            {
-                _keypressed = 3;
-            }
-            if (keystate.IsKeyDown(Keys.R))
-            {
-                _keypressed = 4;
-            }
-            if (keystate.IsKeyDown(Keys.T))
-            {
-                _keypressed = 5;
-            }
-            if (keystate.IsKeyDown(Keys.Y))
-            {
-                _keypressed = 6;
-            }
-            if (keystate.IsKeyDown(Keys.U))
-            {
-                _keypressed = 7;
-            }
-            if (keystate.IsKeyDown(Keys.I))
-            {
-                _keypressed = 8;
-            }
-            if (keystate.IsKeyDown(Keys.O))
-            {
-                _keypressed = 9;
-            }
-            if (keystate.IsKeyDown(Keys.P))
-            {
-                _keypressed = 10;
-            }
 
-            // MIDDLE ROW
-            if (keystate.IsKeyDown(Keys.A))
-            {
-                _keypressed = 11;
-            }
-            if (keystate.IsKeyDown(Keys.S))
-            {
-                _keypressed = 12;
-            }
-            if (keystate.IsKeyDown(Keys.D))
-            {
-                _keypressed = 13;
-            }
-            if (keystate.IsKeyDown(Keys.F))
-            {
-                _keypressed = 14;
-            }
-            if (keystate.IsKeyDown(Keys.G))
-            {
-                _keypressed = 15;
-            }
-            if (keystate.IsKeyDown(Keys.H))
-            {
-                _keypressed = 16;
-            }
-            if (keystate.IsKeyDown(Keys.J))
-            {
-                _keypressed = 17;
-            }
-            if (keystate.IsKeyDown(Keys.K))
-            {
-                _keypressed = 18;
-            }
-            if (keystate.IsKeyDown(Keys.L))
-            {
-                _keypressed = 19;
-            }
+                KeyboardState keystate = Keyboard.GetState();
+                // TOP ROW
+                if (keystate.IsKeyDown(Keys.Q))
+                {
+                    _keypressed = 1;
+                }
+                if (keystate.IsKeyDown(Keys.W))
+                {
+                    _keypressed = 2;
+                }
+                if (keystate.IsKeyDown(Keys.E))
+                {
+                    _keypressed = 3;
+                }
+                if (keystate.IsKeyDown(Keys.R))
+                {
+                    _keypressed = 4;
+                }
+                if (keystate.IsKeyDown(Keys.T))
+                {
+                    _keypressed = 5;
+                }
+                if (keystate.IsKeyDown(Keys.Y))
+                {
+                    _keypressed = 6;
+                }
+                if (keystate.IsKeyDown(Keys.U))
+                {
+                    _keypressed = 7;
+                }
+                if (keystate.IsKeyDown(Keys.I))
+                {
+                    _keypressed = 8;
+                }
+                if (keystate.IsKeyDown(Keys.O))
+                {
+                    _keypressed = 9;
+                }
+                if (keystate.IsKeyDown(Keys.P))
+                {
+                    _keypressed = 10;
+                }
 
-            // BOTTOM ROW
-            if (keystate.IsKeyDown(Keys.Z))
-            {
-                _keypressed = 20;
-            }
-            if (keystate.IsKeyDown(Keys.X))
-            {
-                _keypressed = 21;
-            }
-            if (keystate.IsKeyDown(Keys.C))
-            {
-                _keypressed = 22;
-            }
-            if (keystate.IsKeyDown(Keys.V))
-            {
-                _keypressed = 23;
-            }
-            if (keystate.IsKeyDown(Keys.B))
-            {
-                _keypressed = 24;
-            }
-            if (keystate.IsKeyDown(Keys.N))
-            {
-                _keypressed = 25;
-            }
-            if (keystate.IsKeyDown(Keys.M))
-            {
-                _keypressed = 26;
-            }
-            if (keystate.IsKeyDown(Keys.OemComma))
-            {
-                _keypressed = 27;
-            }
+                // MIDDLE ROW
+                if (keystate.IsKeyDown(Keys.A))
+                {
+                    _keypressed = 11;
+                }
+                if (keystate.IsKeyDown(Keys.S))
+                {
+                    _keypressed = 12;
+                }
+                if (keystate.IsKeyDown(Keys.D))
+                {
+                    _keypressed = 13;
+                }
+                if (keystate.IsKeyDown(Keys.F))
+                {
+                    _keypressed = 14;
+                }
+                if (keystate.IsKeyDown(Keys.G))
+                {
+                    _keypressed = 15;
+                }
+                if (keystate.IsKeyDown(Keys.H))
+                {
+                    _keypressed = 16;
+                }
+                if (keystate.IsKeyDown(Keys.J))
+                {
+                    _keypressed = 17;
+                }
+                if (keystate.IsKeyDown(Keys.K))
+                {
+                    _keypressed = 18;
+                }
+                if (keystate.IsKeyDown(Keys.L))
+                {
+                    _keypressed = 19;
+                }
 
+                // BOTTOM ROW
+                if (keystate.IsKeyDown(Keys.Z))
+                {
+                    _keypressed = 20;
+                }
+                if (keystate.IsKeyDown(Keys.X))
+                {
+                    _keypressed = 21;
+                }
+                if (keystate.IsKeyDown(Keys.C))
+                {
+                    _keypressed = 22;
+                }
+                if (keystate.IsKeyDown(Keys.V))
+                {
+                    _keypressed = 23;
+                }
+                if (keystate.IsKeyDown(Keys.B))
+                {
+                    _keypressed = 24;
+                }
+                if (keystate.IsKeyDown(Keys.N))
+                {
+                    _keypressed = 25;
+                }
+                if (keystate.IsKeyDown(Keys.M))
+                {
+                    _keypressed = 26;
+                }
+                if (keystate.IsKeyDown(Keys.OemComma))
+                {
+                    _keypressed = 27;
+                }
+            }
         }
     }
 }

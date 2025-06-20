@@ -29,7 +29,7 @@ namespace GME1011_StarFall_Koven
                 "stop following me!!!",
                 "um... over here?",
                 "whats your problem.",
-                "wish i never met you.",
+                "*  Sobs  *",
                 "what ever i guess."
             };
         }
@@ -37,16 +37,24 @@ namespace GME1011_StarFall_Koven
         {
             if (_timer > 0)
             {
-                _timer--;
-                _toggle = true;
+            _timer--;
+            _toggle = true;
             }
             else if (_toggle)
             {
-                _timer = _rng.Next(2, 6) * 60; // Reset the timer rng
-                _visable = (false == _visable);
-                _description = _ralphalog[_rng.Next(0, _ralphalog.Length)];
-                _toggle = false;
+            _timer = _rng.Next(3, 7) * 60; // Reset the timer rng
+            _visable = (false == _visable);
+            _toggle = false;
+            if (_playingKey.Gethealth() != 0)
+                {
+                    _description = _ralphalog[_rng.Next(0, _ralphalog.Length)];
+                }
+                else
+                {
+                    _description = "Some Peace and Quiet.";
+                }
             }
+        
         }
 
         public override void Update()

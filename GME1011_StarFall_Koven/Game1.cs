@@ -77,10 +77,12 @@ namespace GME1011_StarFall_Koven
             }
 
             KeyboardState keystate = Keyboard.GetState();
-            if (keystate.IsKeyDown(Keys.Space))
+            if (keystate.IsKeyDown(Keys.Space) && _kovensKeys.Gethealth() == 0)
             {
-                Debug.WriteLine("Spot "+(_kovensKeycaps[0].GetSpot()) + " Texture loaded at " + (_kovensKeycaps[0].GetLocation()) +
-                    " \n Player Spot "+(_kovensKeys.GetKeyPressed()) + " location of player at " + (_kovensKeys.GetLocation()));
+                _kovensKeys.TakeDamage(3);
+                _kovensKeys.ResetPoints();
+                _kovensKeycaps.Clear(); // Clear the keycaps when space is pressed
+                _kovensKeycaps.Add(new ralph(Content.Load<Texture2D>("Ralph"), _kovensKeys, Content.Load<SpriteFont>("RalphText"))); // Add a new keycap
             }
 
             _timer++;
@@ -112,6 +114,10 @@ namespace GME1011_StarFall_Koven
             _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Red);
             _spriteBatch.DrawString(gameFont, "Time"+ _gameTime2 +" : "+_gameTime, new Vector2(700, 460), Color.Red);
 
+            if (_kovensKeys.Gethealth() <= 0)
+            {
+                _spriteBatch.DrawString(Content.Load<SpriteFont>("RalphText"), "Game Over!\nPress   Space   to   Restart...", new Vector2(300, 10), Color.Red);
+            }
 
             _spriteBatch.End();
 
