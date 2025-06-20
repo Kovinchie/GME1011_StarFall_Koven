@@ -23,7 +23,7 @@ namespace GME1011_StarFall_Koven
 
         private Song _music;
         private List<SoundEffect> _hitSounds;
-
+        private bool _musicToggle;
 
         private Texture2D _background;
         private SpriteFont gameFont;
@@ -32,7 +32,7 @@ namespace GME1011_StarFall_Koven
         private List<Clouds> _clouds;
         private Random _rng = new Random();
         private int _digitCount1;
-        private int _digitCoun2;
+        private int _digitCount2;
         private int _timer;
 
         public Game1()
@@ -43,9 +43,9 @@ namespace GME1011_StarFall_Koven
 
             _kovensKeys = new kovensKeys();
             _digitCount1 = 0;
-            _digitCoun2 = 0;
+            _digitCount2 = 0;
             _timer = 0; // Initialize timeAdd to 0
-
+            _musicToggle = true; // Initialize music toggle to true
         }
 
         protected override void Initialize()
@@ -61,6 +61,8 @@ namespace GME1011_StarFall_Koven
         protected override void LoadContent()
         {
             _music = Content.Load<Song>("Plaint");
+            MediaPlayer.Play(_music);
+            MediaPlayer.IsRepeating = true;
             _hitSounds = new List<SoundEffect>
             {
                 Content.Load<SoundEffect>("Wood"),
@@ -69,7 +71,7 @@ namespace GME1011_StarFall_Koven
                 Content.Load<SoundEffect>("Shuffle"),
                 Content.Load<SoundEffect>("Yap")
             };
-            MediaPlayer.Play(_music);
+            
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _background = Content.Load<Texture2D>("Keyboard");
@@ -125,10 +127,11 @@ namespace GME1011_StarFall_Koven
             }
             if (_digitCount1 >= 60)
             {
-                _digitCoun2++;
+                _digitCount2++;
                 _digitCount1 = 0;
             }
-            _clouds.ForEach(cloud => cloud.Update()); // Update clouds if you have a Clouds class
+            _clouds.ForEach(cloud => cloud.Update()); // Update clouds
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -145,7 +148,7 @@ namespace GME1011_StarFall_Koven
             _spriteBatch.Draw(Content.Load<Texture2D>("CurrentKeycap"), _kovensKeys.GetLocation(), Color.White);
             _kovensKeycaps.ForEach(keyCap => keyCap.Draw(_spriteBatch));
             _spriteBatch.DrawString(gameFont, "Health : "+_kovensKeys.Gethealth() + "\nPoints : "+_kovensKeys.GetPoints(), new Vector2(10, 10), Color.Maroon);
-            _spriteBatch.DrawString(gameFont, "Time"+ _digitCoun2 +" : "+_digitCount1, new Vector2(700, 460), Color.Maroon);
+            _spriteBatch.DrawString(gameFont, "Time"+ _digitCount2 +" : "+_digitCount1, new Vector2(700, 460), Color.Maroon);
 
             if (_kovensKeys.Gethealth() <= 0)
             {
