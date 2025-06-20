@@ -45,7 +45,6 @@ namespace GME1011_StarFall_Koven
             _digitCount1 = 0;
             _digitCount2 = 0;
             _timer = 0; // Initialize timeAdd to 0
-            _musicToggle = true; // Initialize music toggle to true
         }
 
         protected override void Initialize()
